@@ -90,22 +90,6 @@ a {
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
-.nav .back {
-  display: none;
-  padding: 8px 12px;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.1);
-  color: var(--text);
-  font-size: 16px;
-}
-
-@media (max-width: 860px) {
-  .nav .back {
-    display: block; /* We'll control show/hide in JS */
-  }
-}
-
 .nav .brand {
   font-weight: 700;
   letter-spacing: .5px;
