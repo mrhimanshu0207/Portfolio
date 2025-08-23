@@ -2,7 +2,6 @@
 const menuBtn = document.querySelector('.menu');
 const nav = document.querySelector('.nav nav');
 const navLinks = document.querySelectorAll('.nav a');
-const backBtn = document.querySelector('.nav .back');
 const sections = document.querySelectorAll('section[id]');
 const revealElements = document.querySelectorAll('.reveal');
 const typedTarget = document.getElementById('typed');
@@ -10,8 +9,6 @@ const typedTarget = document.getElementById('typed');
 // ===== Mobile menu toggle =====
 menuBtn?.addEventListener('click', () => {
   nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-  backBtn.style.display = 'none';
-  navLinks.forEach(link => link.style.display = 'block'); // show all links
 });
 
 // ===== Active link on click =====
@@ -19,21 +16,9 @@ navLinks.forEach(a => {
   a.addEventListener('click', e => {
     navLinks.forEach(n => n.classList.remove('active'));
     e.currentTarget.classList.add('active');
-
-    if (window.innerWidth <= 860) {
-      // Hide other links except clicked
-      navLinks.forEach(link => {
-        if (link !== e.currentTarget) link.style.display = 'none';
-      });
-      backBtn.style.display = 'block'; // show back button
-    }
+    // Close mobile menu after click
+    if (nav.style.display === 'flex') nav.style.display = 'none';
   });
-});
-
-// ===== Back button click =====
-backBtn?.addEventListener('click', () => {
-  navLinks.forEach(link => link.style.display = 'block'); // show all links
-  backBtn.style.display = 'none';
 });
 
 // ===== Scroll-based active section highlighting =====
