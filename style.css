@@ -20,7 +20,7 @@ html, body {
 
 /* Add padding so content doesn't hide behind fixed header */
 body {
-  padding-top: 80px;
+  padding-top: 80px; /* adjust according to header height */
 }
 
 a {
@@ -72,7 +72,7 @@ a {
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
-/* NAV */
+/* NAV (Fixed Glass Header) */
 .nav {
   position: fixed;
   top: 0;
@@ -85,8 +85,8 @@ a {
   z-index: 1000;
   background: var(--glass-bg);
   border: 1px solid var(--glass-brd);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
@@ -101,7 +101,6 @@ a {
   flex: 1;
   justify-content: center;
   flex-wrap: wrap;
-  position: relative;
 }
 
 .nav a {
@@ -114,18 +113,6 @@ a {
 .nav a:hover {
   color: var(--text);
   background: rgba(255,255,255,.08);
-}
-
-/* Indicator bar */
-.nav-indicator {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 3px;
-  background: #fff;
-  transition: all 0.3s ease;
-  border-radius: 2px;
 }
 
 .menu {
@@ -147,6 +134,7 @@ a {
   text-align: center;
   margin: 0 0 22px;
   font-size: 28px;
+  color: var(--text);
 }
 
 /* HERO */
@@ -163,7 +151,6 @@ a {
   padding: 28px;
 }
 
-/* === FLOATING IMAGE (Feature A) === */
 .avatar-wrap {
   width: 320px;
   height: 320px;
@@ -172,32 +159,6 @@ a {
   background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.02));
   display: grid;
   place-items: center;
-  animation: float 4s ease-in-out infinite;
-  position: relative;
-}
-
-.avatar-wrap::after {
-  content: "";
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 20px;
-  background: rgba(0, 0, 0, 0.35);
-  filter: blur(14px);
-  border-radius: 50%;
-  animation: shadowFloat 4s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes shadowFloat {
-  0%, 100% { transform: scale(1); opacity: 0.45; }
-  50% { transform: scale(0.8); opacity: 0.25; }
 }
 
 .avatar {
@@ -229,7 +190,6 @@ a {
   line-height: 1.7;
 }
 
-/* === SOCIAL ICONS GLOW (Feature B) === */
 .social {
   display: flex;
   gap: 12px;
@@ -237,25 +197,17 @@ a {
 }
 
 .social a {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.15);
-  transition: 0.3s ease;
-  font-size: 18px;
+  border-radius: 12px;
 }
 
 .social a:hover {
-  background: var(--accent);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 18px var(--accent);
-  color: #000;
+  background: rgba(255,255,255,.08);
 }
 
-/* Button */
 .btn {
   display: inline-block;
   padding: 10px 18px;
@@ -263,22 +215,8 @@ a {
   border: 1px solid var(--glass-brd);
 }
 
-/* Neon Button */
-.neon-btn {
-  padding: 12px 22px;
-  border-radius: 12px;
-  color: #fff;
-  font-weight: 600;
-  border: 2px solid var(--accent);
-  box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
-  transition: 0.3s ease;
-}
-
-.neon-btn:hover {
-  background: var(--accent);
-  color: #000;
-  box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent), 0 0 36px var(--accent);
-  transform: scale(1.05);
+.btn:hover {
+  background: rgba(255,255,255,.1);
 }
 
 /* Grids & Cards */
@@ -300,35 +238,21 @@ a {
   color: var(--muted);
 }
 
-/* === SKILL ICON GRID (Feature D) === */
-.skill-icons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 16px;
-  text-align: center;
-}
-
-.skill-icon {
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
   padding: 16px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.15);
-  transition: 0.3s ease;
 }
 
-.skill-icon i {
-  font-size: 34px;
-  color: var(--accent);
-  margin-bottom: 6px;
+.chips span {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-brd);
+  background: rgba(255,255,255,.05);
 }
 
-.skill-icon:hover {
-  transform: translateY(-6px);
-  background: rgba(255,255,255,0.12);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-}
-
-/* TIMELINE */
 .timeline {
   display: grid;
   gap: 14px;
@@ -339,17 +263,26 @@ a {
 }
 
 /* Lists */
+.list {
+  padding: 16px;
+}
+
 .list li {
   margin: 8px 0;
   color: var(--muted);
 }
 
-/* CONTACT */
+/* Contact */
 .contact {
   display: grid;
   gap: 10px;
   padding: 18px;
   text-align: center;
+}
+
+.contact a {
+  padding: 10px;
+  border-radius: 12px;
 }
 
 .contact a:hover {
@@ -363,34 +296,13 @@ a {
   text-align: center;
 }
 
-/* === PROJECT HOVER ZOOM (Feature E) === */
-.project {
-  cursor: pointer;
-  transition: all 0.35s ease;
-}
-
-.project:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.45);
-}
-
-.project img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  transition: 0.4s ease;
-}
-
-.project:hover img {
-  transform: scale(1.08);
-}
-
-/* Reveal */
+/* Reveal on scroll */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: all .7s ease;
 }
+
 .reveal.visible {
   opacity: 1;
   transform: none;
@@ -413,5 +325,40 @@ a {
     height: 360px;
   }
 }
+/* Keep anchor targets out from under the fixed header */
+section { scroll-margin-top: 90px; }  /* tune to your header height */
+/* Neon Button */
+.neon-btn {
+  position: relative;
+  padding: 12px 22px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 8px var(--accent), 0 0 16px var(--accent);
+  transition: all 0.3s ease;
+}
 
-section { scroll-margin-top: 90px; }
+.neon-btn:hover {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 12px var(--accent), 0 0 24px var(--accent), 0 0 36px var(--accent);
+  transform: scale(1.05);
+}
+
+/* Nav container should be position: relative */
+.nav nav {
+  position: relative;
+}
+
+/* Sliding indicator background */
+.nav-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: #fff; /* Or your highlight color */
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
