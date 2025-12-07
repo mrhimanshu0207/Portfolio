@@ -11,18 +11,19 @@ menuBtn?.addEventListener('click', () => {
   nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
 });
 
-// ===== Active nav link highlight =====
+// ===== Active link on click =====
 navLinks.forEach(a => {
   a.addEventListener('click', e => {
     navLinks.forEach(n => n.classList.remove('active'));
     e.currentTarget.classList.add('active');
+    // Close mobile menu after click
     if (nav.style.display === 'flex') nav.style.display = 'none';
   });
 });
 
-// ===== Scroll section highlight =====
+// ===== Scroll-based active section highlighting =====
 window.addEventListener('scroll', () => {
-  let scrollY = window.scrollY + 150;
+  let scrollY = window.scrollY + 150; // Adjust for header offset
   sections.forEach(sec => {
     const secTop = sec.offsetTop;
     const secHeight = sec.offsetHeight;
@@ -50,7 +51,7 @@ const io = new IntersectionObserver(entries => {
 
 revealElements.forEach(el => io.observe(el));
 
-// ===== Typewriter animation =====
+// ===== Tiny typewriter for hero subtitle =====
 if (typedTarget) {
   const phrases = ["Frontend Developer", "Problem Solver", "Cybersecurity Learner"];
   let pi = 0, ci = 0, del = false;
